@@ -20,7 +20,81 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+#### Client
+
+Instantiate a client, providing the IP of the host and the security token:
+```ruby
+
+client = Shaman::Client.new('127.0.0.1', 'secret')
+
+```
+
+#### Domain Records
+
+List all of the registered dns records:
+```ruby
+client.records
+```
+
+Fetch information about a particular record:
+```ruby
+client.record('nanobox.io')
+```
+
+Add a new domain record:
+```ruby
+client.add_record({
+    domain: 'nanobox.io',     # Domain name to resolve
+    records: [
+      ttl: 60,                # Seconds a client should cache for
+      class: 'IN',            # Record class
+      type: 'A',              # Record type (A, CNAME, MX, etc)
+      address: '127.0.0.1'    # Address domain resolves to
+    ]
+})
+```
+
+Update a registered domain record:
+```ruby
+client.update_record('nanobox.io', {
+  domain: 'nanobox.io',     # Domain name to resolve
+  records: [
+    ttl: 60,                # Seconds a client should cache for
+    class: 'IN',            # Record class
+    type: 'A',              # Record type (A, CNAME, MX, etc)
+    address: '127.0.0.1'    # Address domain resolves to
+  ]
+})
+```
+
+Remove a registered domain:
+```ruby
+client.remove_record('nanobox.io')
+```
+
+Reset all records:
+```ruby
+client.reset_records([
+  {
+    domain: 'nanobox.io',     # Domain name to resolve
+    records: [
+      ttl: 60,                # Seconds a client should cache for
+      class: 'IN',            # Record class
+      type: 'A',              # Record type (A, CNAME, MX, etc)
+      address: '127.0.0.1'    # Address domain resolves to
+    ]
+  },
+  {
+    domain: 'gonano.io',     # Domain name to resolve
+    records: [
+      ttl: 60,                # Seconds a client should cache for
+      class: 'IN',            # Record class
+      type: 'A',              # Record type (A, CNAME, MX, etc)
+      address: '127.0.0.1'    # Address domain resolves to
+    ]
+  }
+])
+```
 
 ## Development
 
