@@ -63,7 +63,7 @@ class Shaman::Client
       req.headers['X-AUTH-TOKEN'] = token
     end
 
-    if res.status == 200
+    if res.status >= 200 && res.status < 300
       from_json(res.body) rescue ""
     else
       raise "#{res.status}:#{res.body}"
@@ -76,7 +76,7 @@ class Shaman::Client
       req.body = to_json(payload)
     end
 
-    if res.status == 200
+    if res.status >= 200 && res.status < 300
       from_json(res.body) rescue ""
     else
       raise "#{res.status}:#{res.body}"
@@ -89,7 +89,7 @@ class Shaman::Client
       req.body = to_json(payload)
     end
 
-    if res.status == 200
+    if res.status >= 200 && res.status < 300
       from_json(res.body) rescue ""
     else
       raise "#{res.status}:#{res.body}"
@@ -104,7 +104,7 @@ class Shaman::Client
       end
     end
 
-    if res.status == 200
+    if res.status >= 200 && res.status < 300
       true
     else
       raise "#{res.status}:#{res.body}"
