@@ -112,10 +112,11 @@ class Shaman::Client
   end
 
   def connection
-    @connection ||= ::Faraday.new({
+    @connection ||= ::Faraday.new(
       url: "https://#{host}:1632",
-      :ssl => {:verify => false}
-    })
+      ssl: { verify: false },
+      request: { timeout: 10 }
+    )
   end
 
   def to_json(data)
@@ -125,5 +126,4 @@ class Shaman::Client
   def from_json(data)
     JSON.parse(data)
   end
-
 end
